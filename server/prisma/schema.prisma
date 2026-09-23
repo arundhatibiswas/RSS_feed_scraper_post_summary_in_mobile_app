@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("SUB_EDITOR") // ADMIN, EDITOR, SUB_EDITOR
+  isActive  Boolean  @default(true)
+  articles  Article[]
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  articles Article[]
+}
+
+model Article {
+  id          Int      @id @default(autoincrement())
+  title       String
+  content     String   @default("")
+  summary     String?
+  status      String   @default("UNDER_REVIEW") // PENDING, UNDER_REVIEW, APPROVED, REJECTED, PUBLISHED
+  imageUrl    String?  @map("image_url")
+  authorId    Int?
+  author      User?    @relation(fields: [authorId], references: [id])
+  categoryId  Int?     @default(1)
+  category    Category? @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  isBreaking  Boolean  @default(false)
+  views       Int      @default(0)
+  clicks      Int      @default(0)
+
+  @@map("articles")
+}

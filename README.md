@@ -61,8 +61,8 @@ npm run dev
 | Role | Email | Password | Access |
 |---|---|---|---|
 | 👑 Admin | `admin@news.com` | `admin123` | Full platform + analytics |
-| ✍️ Editor | `john@news.com` | `editor123` | Editorial review queue |
-| ⚡ Sub-Editor | `jane@news.com` | `editor123` | AI queue + Flash Mode |
+| ✍️ Editor | `john@news.com` | `admin123` | Editorial review queue |
+| ⚡ Sub-Editor | `jane@news.com` | `admin123` | AI queue + Flash Mode |
 
 ---
 
